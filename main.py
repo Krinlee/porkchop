@@ -44,7 +44,7 @@ target_channel_id = tchan
 # Time settings
 
 utc = datetime.timezone.utc
-time = datetime.time(hour=12, minute=5)
+time = datetime.time(hour=17, minute=30)
 
 
 
