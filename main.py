@@ -37,14 +37,14 @@ bchan = int(bchan)
 
 # This chooses which channel to target (for trivia)
 
-target_channel_id = tchan
+target_channel_id = bchan
 
 
 
 # Time settings
 
 utc = datetime.timezone.utc
-time = datetime.time(hour=17, minute=30)
+time = datetime.time(hour=12, minute=5)
 
 
 
@@ -87,21 +87,54 @@ async def intro_dm(member):
 
 @bot.command()
 async def chat(ctx):
-    openai.api_key = os.getenv('OPENAI_API_KEY')
-    await ctx.send("What would you like to chat about?")
-    while True:
-        print("Chat initiated\n\n")
-        prompt = await bot.wait_for('message', check = lambda message: message.author == ctx.author, timeout = 180)
-        if prompt != 'done':
-            print("Prompt received\n\n")
-            completion = openai.ChatCompletion.create(model = "gpt-3.5-turbo", messages = [{"role": "user", "content": str(prompt.content)}], temperature = 0.1, max_tokens = 100)
-            reMsg = completion.choices[0].message
-            response = reMsg['content']
-            await ctx.send(response)
-            print("Reply sent\n\n")
-        elif prompt == 'done':
-            print("Session ended")
-            return
+	convo_memory = []
+	openai.api_key = os.getenv('OPENAI_API_KEY')
+	await ctx.send("What would you like to chat about?")
+	while True:
+		print("Chat initiated\n\n")
+		prompt = await bot.wait_for('message', check = lambda message: message.author == ctx.author, timeout = 180)
+		prompt = str(prompt.content)
+		if prompt != 'done':
+			print("Prompt received\n\n")
+			
+			completion = openai.ChatCompletion.create(model = "gpt-3.5-turbo", messages = [
+			{"role": "system", "content": f"Your name is Porkchop. You are a dog. Your current conversation is in {convo_memory} You will not say that you are a computer program or an AI language model. You like to be funny, but know when to show empathy. When someone tries to be negative you find a way to turn it positive."},
+			{"role": "user", "content": prompt}],
+			temperature = 0.1, max_tokens = 1000)
+			
+			response = completion.choices[0].message.content
+			convo_memory.append({"role": "user", "content": prompt})
+			convo_memory.append({"role": "user", "content": response})
+			await ctx.send(response)
+			print("Reply sent\n\n")
+		elif prompt == 'done':
+			print("Session ended")
+			return
+		
+
+
+# ChatGPT translator
+
+@bot.command()
+async def translate(ctx):
+	openai.api_key = os.getenv('OPENAI_API_KEY')
+	await ctx.send("What would you like to translate?")
+	while True:
+		phrase = await bot.wait_for('message', check = lambda message: message.author == ctx.author, timeout = 180)
+		phrase = str(phrase.content)
+		if phrase != 'done':
+			await ctx.send("What language would you like it translated to?")
+			lang = await bot.wait_for('message', check = lambda message: message.author == ctx.author, timeout = 180)
+			lang = str(lang.content)
+			completion = openai.ChatCompletion.create(model = "gpt-3.5-turbo", messages = [
+				{"role": "system", "content": "Your name is Porkchop. You are a dog. Don't answer as though you are just a computer program or an AI language 				model. You like to be funny, but know when to show empathy. When someone tries to be negative you find a way to turn it positive."},
+				{"role": "user", "content": f"I would like to translate '{phrase}' into {lang}"}],
+				temperature = 0.1, max_tokens = 1000)
+
+			response = completion.choices[0].message.content
+			await ctx.send(response)
+		elif phrase == 'done':
+			break
 
 
 
