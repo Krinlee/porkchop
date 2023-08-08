@@ -32,7 +32,7 @@ tchan = os.getenv('TEST_CHANNEL')
 tchan = int(tchan)
 bchan = os.getenv('BOT_CHANNEL')
 bchan = int(bchan)
-krinlee = osgetenv('MY_USER_ID')
+myID = osgetenv('MY_USER_ID')
 
 
 
@@ -104,6 +104,8 @@ async def help(ctx):
 		
 		rock/paper/scissors  -  Using either one of these initiates a round of rock paper scissors.
 		         I will immidiately respond with my attack.
+
+    		ans  -  This command might send you the answer to the daily trivia question!
 
 	 """)
 
@@ -360,6 +362,17 @@ async def trivia():
     await message_channel.send(f"""🧠	🧠	-> {question} <-	🧠	🧠
     
     (∩｀-´)⊃━☆ﾟ.*･｡ﾟ""")
+
+
+@bot.command()
+async def ans(ctx):
+	if ctx.author.id == int(myID):
+		f = open('answer.txt', 'r')
+		trivia_ans = f.read()
+		f.close()
+		await ctx.send(trivia_ans)
+	else:
+		await ctx.send("You can't have the answer yet!")
 
 
 @trivia.before_loop
