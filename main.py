@@ -32,6 +32,7 @@ tchan = os.getenv('TEST_CHANNEL')
 tchan = int(tchan)
 bchan = os.getenv('BOT_CHANNEL')
 bchan = int(bchan)
+krinlee = osgetenv('MY_USER_ID')
 
 
 
