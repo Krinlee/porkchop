@@ -79,8 +79,32 @@ async def intro_dm(member):
     
     We do that here. For now there isn't much, but there's always room to grow!
     
-    Please be respectful to everyone, and have fun!     🎉""")
+    Please be respectful to everyone, and have fun!     🎉
+    
+    If you are interested in using the Bot type "-help"! """)
 
+
+@bot.command()
+async def help(ctx):
+	await ctx.send("""Hey there! It looks like you're interested in learning what all I can do
+		with and for you. I would love to... help. As I'm sure you've figured out (because you
+		got this far) you use the "-" to initiate the commands. The different commands and
+		a short description are:
+
+		help  -  That brings you here!
+		
+		chat  -  This starts a chat session with me! We can chill and have a conversation until
+				 I eaither time out (180 seconds) or you type "done"
+		
+		translate  -  You can use this to translate virtually anything into a language of your choice.
+		         Options may be limited due to limitations of ChatGPT.
+		
+		hangman  -  This starts you a game of Hangman.
+		
+		rock/paper/scissors  -  Using either one of these initiates a round of rock paper scissors.
+		         I will immidiately respond with my attack.
+
+	 """)
 
 
 # chatgpt command
@@ -214,16 +238,19 @@ async def rock(ctx):
         botMove = random.choice(options)
         await ctx.send(botMove)
         if botMove == 'rock':
-            await ctx.send("It's a tie    👔")
+            await ctx.send(f"""I choose {rockR}
+	    It's a tie    👔""")
             print("There was a tie\n\n")
             await asyncio.sleep(1)
         elif botMove == 'paper':
-            await ctx.send(f"""{paperR} beats   {rockR}
+            await ctx.send(f"""I choose {paperR}
+	    {paperR} beats   {rockR}
         Bot wins      ⚰️""")
             print("Bot wins\n\n")
             await asyncio.sleep(1)
         elif botMove == 'scissors':
-            await ctx.send(f"""{rockR}  beats   {scissorsR}
+            await ctx.send(f"""I choose {scissorsR}
+	    {rockR}  beats   {scissorsR}
         You win   🎉""")
             print("Beat the bot\n\n")
         break
@@ -238,16 +265,19 @@ async def paper(ctx):
         botMove = random.choice(options)
         await ctx.send(botMove)
         if botMove == 'rock':
-            await ctx.send(f"""{paperP} beats   {rockP}
+            await ctx.send(f"""I choose {rockP}
+	    {paperP} beats   {rockP}
         You win   🎉""")
             print("Beat the bot\n\n")
             await asyncio.sleep(1)
         elif botMove == 'paper':
-            await ctx.send("It's a tie    👔")
+            await ctx.send(f"""I choose {paperP}
+	    It's a tie    👔""")
             print("There was a tie\n\n")
             await asyncio.sleep(1)
         elif botMove == 'scissors':
-            await ctx.send(f"""{scissorsP}    beats {paperP}
+            await ctx.send(f"""I choose {scissorsP}
+	    {scissorsP}    beats {paperP}
         Bot wins      ⚰️""")
             print("Bot wins\n\n")
         break
@@ -262,17 +292,20 @@ async def scissors(ctx):
         botMove = random.choice(options)
         await ctx.send(botMove)
         if botMove == 'rock':
-            await ctx.send(f"""{rockX}  beats   {scissorsX}
+            await ctx.send(f"""I choose {rockX}
+	    {rockX}  beats   {scissorsX}
         Bot wins      ⚰️""")
             print("Bot wins\n\n")
             await asyncio.sleep(1)
         elif botMove == 'paper':
-            await ctx.send(f"""{scissorsX}    beats {paperX}
+            await ctx.send(f"""I choose {paperX}
+	    {scissorsX}    beats {paperX}
         You win       🎉""")
             print("Beat the bot\n\n")
             await asyncio.sleep(1)
         elif botMove == 'scissors':
-            await ctx.send("It's a tie    👔")
+            await ctx.send(f"""I choose {scissorsX}
+	    It's a tie    👔""")
             print("There was a tie\n\n")
         break
 
@@ -330,7 +363,7 @@ async def trivia():
 
 @trivia.before_loop
 async def before_trivia():
-    print("\n\nTrivia is good to go!")
+    print("Trivia is good to go!\n")
     await bot.wait_until_ready()
 
 
