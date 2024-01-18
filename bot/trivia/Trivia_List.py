@@ -1,3 +1,11 @@
+# from discord.ext import commands
+
+# class triviaList(commands.Cog):
+#     def __init__(self, bot):
+#         self.bot = bot
+
+
+
 trivia_List = {}
 
 trivia_List[1] = ["What year was the very first model of the iPhone released?", "2007"]
@@ -400,3 +408,17 @@ trivia_List[397] = ["If a male donkey is a jack, what is the female called?", "J
 trivia_List[398] = ["In what country did carving jack o' lanterns originate?", "Ireland"]
 trivia_List[399] = ["In what American state is it illegal to dress up like a priest or a nun?", "Alabama"]
 trivia_List[400] = ["What has a gravitational pull so strong that even light cannot escapt it?", "A black hole"]
+
+
+
+
+
+# async def setup(bot):
+#     await bot.add_cog(triviaList(bot))
+
+
+
+
+
+
+
