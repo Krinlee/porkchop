@@ -1,0 +1,12 @@
+---
+version: "0.1"
+services:
+  porkchop:
+    image: mrkrinlee/porkchop:latest
+    build:
+      context: .
+    container_name: porkchop
+    volumes:
+      -  /path/to/bot:/app
+    ports:
+      - 22319:22319

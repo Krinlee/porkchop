@@ -1,0 +1,11 @@
+INFO  - 2024-01-20 05:22:48,442 - client : logging in using static token
+INFO  - 2024-01-20 05:22:49,167 - gateway : Shard ID None has connected to Gateway (Session ID: 4241ea57992bf5f2728a8f3f1d61a294).
+INFO  - 2024-01-20 05:23:53,948 - RockPaperScissors : {'Player': 'Scissors!', 'Bot': 'scissors', 'Result': 'Tie!'}
+INFO  - 2024-01-20 07:44:49,374 - gateway : Shard ID None has successfully RESUMED session 4241ea57992bf5f2728a8f3f1d61a294.
+INFO  - 2024-01-20 11:44:12,153 - gateway : Shard ID None has successfully RESUMED session 4241ea57992bf5f2728a8f3f1d61a294.
+INFO  - 2024-01-20 14:09:20,036 - gateway : Shard ID None has successfully RESUMED session 4241ea57992bf5f2728a8f3f1d61a294.
+INFO  - 2024-01-20 15:12:36,227 - gateway : Shard ID None has successfully RESUMED session 4241ea57992bf5f2728a8f3f1d61a294.
+INFO  - 2024-01-20 17:47:29,513 - gateway : Shard ID None has successfully RESUMED session 4241ea57992bf5f2728a8f3f1d61a294.
+INFO  - 2024-01-20 19:47:57,559 - RockPaperScissors : {'Player': 'Paper!', 'Bot': 'paper', 'Result': 'Tie!'}
+INFO  - 2024-01-20 19:48:31,515 - RockPaperScissors : {'Player': 'Rock!', 'Bot': 'paper', 'Result': 'Bot wins!'}
+INFO  - 2024-01-20 20:27:47,524 - gateway : Shard ID None has successfully RESUMED session 4241ea57992bf5f2728a8f3f1d61a294.

@@ -1,4 +1,4 @@
-import discord, settings, random, asyncio, utils
+import discord, settings, random, asyncio
 from discord.ext import commands
 from discord import app_commands
 from settings import *
