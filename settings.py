@@ -1,7 +1,8 @@
-import os, logging, pathlib, discord
+import os, logging, pathlib, discord, config
 from logging.config import dictConfig
 from dotenv import load_dotenv
-from config import *
+from config import secrets
+
 
 
 BASE_DIR = pathlib.Path(__file__).parent
@@ -10,22 +11,23 @@ CMDS_DIR = BASE_DIR / "cmds"
 COGS_DIR = BASE_DIR / "cogs"
 TRIV_DIR = BASE_DIR / "trivia"
 ASSET_DIR = BASE_DIR / "assets"
+CONFIG_DIR = BASE_DIR / "config"
 
 
-load_dotenv()
+# load_dotenv()
 
-DISCORD_API_SECRET = os.getenv("DISCORD_TOKEN")
-GUILD = discord.Object(id=int(os.getenv("GUILD_ID")))
-lchan = os.getenv('GOING_LIVE')
-bchan = os.getenv('BOT_CHANNEL')
-tchan = os.getenv('TEST_CHANNEL')
-tzone = os.getenv('TIME_ZONE')
-OPENAI_KEY = os.getenv('OPENAI_API_KEY')
-DISCORD_ID = os.getenv('MY_USER_ID')
-MY_ID = int(DISCORD_ID)
-streamerName = os.getenv('STREAMER')
-twitch_client_id = os.getenv('CLIENT_ID')
-twitch_client_secret = os.getenv('CLIENT_SECRET')
+# DISCORD_API_SECRET = os.getenv("DISCORD_TOKEN")
+# GUILD = discord.Object(id=int(os.getenv("GUILD_ID")))
+# lchan = os.getenv('GOING_LIVE')
+# bchan = os.getenv('BOT_CHANNEL')
+# tchan = os.getenv('TEST_CHANNEL')
+# tzone = os.getenv('TIME_ZONE')
+# OPENAI_KEY = os.getenv('OPENAI_API_KEY')
+# DISCORD_ID = os.getenv('MY_USER_ID')
+# MY_ID = int(DISCORD_ID)
+# streamerName = os.getenv('STREAMER')
+# twitch_client_id = os.getenv('CLIENT_ID')
+# twitch_client_secret = os.getenv('CLIENT_SECRET')
 
 
 
@@ -57,21 +59,21 @@ LOGGING_CONFIG = {
 		"file":{
 			'level': "INFO",
 			'class': "logging.FileHandler",
-			'filename': f"{BASE_DIR}/logs/infos.log",
+			'filename': f"{BASE_DIR}/config/logs/infos.log",
 			'mode': "w",
 			'formatter': "verbose"
 		},
         "twitch_log":{
 			'level': "INFO",
 			'class': "logging.FileHandler",
-			'filename': f"{BASE_DIR}/logs/twitch.log",
+			'filename': f"{BASE_DIR}/config/logs/twitch.log",
 			'mode': "w",
 			'formatter': "verbose"
 		},
         "trivia_log":{
 			'level': "INFO",
 			'class': "logging.FileHandler",
-			'filename': f"{BASE_DIR}/logs/trivia.log",
+			'filename': f"{BASE_DIR}/config/logs/trivia.log",
 			'mode': "w",
 			'formatter': "verbose"
 		},

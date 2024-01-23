@@ -1,5 +1,6 @@
-import discord, os, random, asyncio, datetime, openai, settings
+import discord, os, random, asyncio, datetime, openai, settings as settings
 from discord.ext import commands, tasks
+from config import secrets
 
 class gpt(commands.Cog, name="Chat Bot"):
      
@@ -11,7 +12,7 @@ class gpt(commands.Cog, name="Chat Bot"):
     @commands.hybrid_command()
     async def chat(self, ctx):
         convo_memory = []
-        openai.api_key = settings.OPENAI_KEY
+        openai.api_key = secrets.OPENAI_KEY
         await ctx.send("What would you like to chat about?")
         while True:
             print("Chat initiated\n\n")
@@ -40,7 +41,7 @@ class gpt(commands.Cog, name="Chat Bot"):
 
     @commands.hybrid_command()
     async def translate(self, ctx):
-        openai.api_key = settings.OPENAI_KEY
+        openai.api_key = secrets.OPENAI_KEY
         await ctx.send("What would you like to translate?")
         while True:
             phrase = await self.bot.wait_for('message', check = lambda message: message.author == ctx.author, timeout = 180)

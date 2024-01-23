@@ -1,4 +1,4 @@
-import discord, requests, json, pytz, settings
+import discord, requests, json, pytz, settings as settings
 from discord.ext import tasks, commands
 from twitchAPI.twitch import Twitch
 from discord.utils import get
@@ -6,16 +6,17 @@ from datetime import datetime
 from datetime import date
 from settings import *
 global userid, stream_data
+from config import secrets
 
 logger = settings.logging.getLogger('twitch')
 
-timezone = pytz.timezone(tzone)
+timezone = pytz.timezone(secrets.tzone)
 datetime_ = datetime.now(timezone)
 today = date.today()
-target_channel_id = int(lchan)
-streamer_name = settings.streamerName
-client_id = settings.twitch_client_id
-client_secret = settings.twitch_client_secret
+target_channel_id = int(secrets.lchan)
+streamer_name = secrets.streamerName
+client_id = secrets.twitch_client_id
+client_secret = secrets.twitch_client_secret
 twitch = Twitch(client_id, client_secret)
 TWITCH_STREAM_API_ENDPOINT_V5 = "https://api.twitch.tv/helix/streams"
 
@@ -45,7 +46,7 @@ def checkuser(user):
         else:
             return False
     except Exception as e:
-        print("Error checking user: ", e)
+        # print("Error checking user: ", e)
         return False
      
     # print(status)
@@ -68,7 +69,7 @@ class twitchLive(commands.Cog):
         stream_data = userid.json()
         with open(f'{ASSET_DIR}/streamers.json', 'r') as file:
             streamers = json.loads(file.read())
-        guild = self.bot.get_guild(settings.GUILD)
+        guild = self.bot.get_guild(secrets.GUILD)
         channel = self.bot.get_channel(target_channel_id)
         for user_id, twitch_name in streamers.items():
             status = checkuser(twitch_name)

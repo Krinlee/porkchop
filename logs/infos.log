@@ -1,3 +1,0 @@
-INFO  - 2024-01-23 00:36:24,725 - client : logging in using static token
-INFO  - 2024-01-23 00:36:25,827 - gateway : Shard ID None has connected to Gateway (Session ID: d09e4ac8f9d49b0cda423409a589667d).
-INFO  - 2024-01-23 00:37:14,901 - RockPaperScissors : {'Player': 'Scissors!', 'Bot': 'paper', 'Result': 'Player wins!'}

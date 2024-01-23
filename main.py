@@ -1,4 +1,4 @@
-import discord, settings, random, asyncio
+import discord, random, asyncio, settings
 from discord.ext import commands
 from discord import app_commands
 from settings import *
@@ -7,10 +7,11 @@ from cogs.RockPaperScissors import rPs
 from cogs.Trivia import trivAnswer
 from cogs.Hangman import hMan
 from cogs.cgpt import gpt
+from config import secrets
 
 logger = settings.logging.getLogger("bot")
 
-target_channel_id = settings.tchan
+target_channel_id = secrets.tchan
 
 # ************************************** TESTING AREA BEGINS ************************************
 
@@ -31,19 +32,18 @@ def run():
 			if cog_file != "__init__.py":
 				await bot.load_extension(f"cogs.{cog_file.name[:-3]}")
 
-		bot.tree.copy_global_to(guild=settings.GUILD)
-		await bot.tree.sync(guild=settings.GUILD)
+		bot.tree.copy_global_to(guild=secrets.GUILD)
+		await bot.tree.sync(guild=secrets.GUILD)
 	
 	
 		
 	
 	logger.info({
-		"User": f"{settings.streamerName} - {settings.DISCORD_ID}",
+		"User": f"{secrets.streamerName} - {secrets.DISCORD_ID}",
 		"Bot": "Porkchop"
 		})
 
-	bot.run(settings.DISCORD_API_SECRET, root_logger=True)
+	bot.run(secrets.DISCORD_API_SECRET, root_logger=True)
 
 if __name__ == "__main__":
-	print("\nPorkchop v0.3\n")
 	run()

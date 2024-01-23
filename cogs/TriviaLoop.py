@@ -1,12 +1,12 @@
-import discord, os, random, asyncio, datetime, settings
+import discord, os, random, asyncio, datetime, settings as settings
 from discord.ext import commands, tasks
 from settings import *
 from trivia.Trivia_List import *
-
+from config import secrets
 
 logger = settings.logging.getLogger('trivia')
 
-target_channel_id = settings.bchan
+target_channel_id = secrets.bchan
 utc = datetime.timezone.utc
 time = datetime.time(hour=13, minute=5)
 
