@@ -1,6 +1,7 @@
 import os, logging, pathlib, discord
 from logging.config import dictConfig
 from dotenv import load_dotenv
+from config import *
 
 
 BASE_DIR = pathlib.Path(__file__).parent

@@ -7,6 +7,6 @@ services:
       context: .
     container_name: porkchop
     volumes:
-     # -  /mnt/user/appdata/porkchop:/app
+      -  /mnt/user/appdata/porkchop:/config
     ports:
       - 22319:22319
