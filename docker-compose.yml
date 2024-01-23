@@ -2,11 +2,11 @@
 version: "0.2"
 services:
   porkchop:
-    image: mrkrinlee/porkchop:latest
+    image: mrkrinlee/porkchop
     build:
       context: .
     container_name: porkchop
     volumes:
-      -  /mnt/user/appdata/porkchop:/app
+     # -  /mnt/user/appdata/porkchop:/app
     ports:
       - 22319:22319
