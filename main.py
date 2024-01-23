@@ -45,4 +45,5 @@ def run():
 	bot.run(settings.DISCORD_API_SECRET, root_logger=True)
 
 if __name__ == "__main__":
+	print("\nPorkchop v0.3\n")
 	run()
