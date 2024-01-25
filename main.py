@@ -1,12 +1,5 @@
-import discord, random, asyncio, settings
+import discord, asyncio, settings
 from discord.ext import commands
-from discord import app_commands
-from settings import *
-# from twitchAPI.twitch import Twitch
-from cogs.RockPaperScissors import rPs
-from cogs.Trivia import trivAnswer
-from cogs.Hangman import hMan
-from cogs.cgpt import gpt
 from config import secrets
 
 logger = settings.logging.getLogger("bot")
