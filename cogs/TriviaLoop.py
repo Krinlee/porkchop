@@ -1,7 +1,6 @@
 import discord, os, random, asyncio, json, datetime, settings as settings
 from discord.ext import commands, tasks
 from settings import *
-from trivia.Trivia_List import *
 from config import secrets
 from urllib.request import urlopen
 
