@@ -1,8 +1,9 @@
-import discord, os, random, asyncio, datetime, settings as settings
+import discord, os, random, asyncio, json, datetime, settings as settings
 from discord.ext import commands, tasks
 from settings import *
 from trivia.Trivia_List import *
 from config import secrets
+from urllib.request import urlopen
 
 logger = settings.logging.getLogger('trivia')
 
@@ -41,9 +42,11 @@ class tRivia(commands.Cog):
         
         (人❛ᴗ❛)♪тнайк　чоц♪(❛ᴗ❛*人)""")
             await asyncio.sleep(10)
-            pick = trivia_List[random.randint(0, 400)]
-            question = pick[0]
-            answer = pick[1]
+            url = 'https://opentdb.com/api.php?amount=1&type=multiple'
+            trivia_url = urlopen(url)
+            trivia = json.loads(trivia_url.read())
+            question = trivia["results"][0]["question"]
+            answer = trivia["results"][0]["correct_answer"]
             f = open(f'{TRIV_DIR}/question.txt', 'w')
             f.write(f"{question}")
             f.close()
@@ -51,9 +54,11 @@ class tRivia(commands.Cog):
             f.write(f"{answer}")
             f.close
         except:
-            pick = trivia_List[random.randint(0, 400)]
-            question = pick[0]
-            answer = pick[1]
+            url = 'https://opentdb.com/api.php?amount=1&type=multiple'
+            trivia_url = urlopen(url)
+            trivia = json.loads(trivia_url.read())
+            question = trivia["results"][0]["question"]
+            answer = trivia["results"][0]["correct_answer"]
             f = open(f'{TRIV_DIR}/question.txt', 'w')
             f.write(f"{question}")
             f.close()
@@ -79,8 +84,8 @@ class tRivia(commands.Cog):
         await self.bot.wait_until_ready()
 
     
-async def setup(bot):
-    await bot.add_cog(tRivia(bot))
+def setup(bot):
+    bot.add_cog(tRivia(bot))
 
 
 
