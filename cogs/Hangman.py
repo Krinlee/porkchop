@@ -16,7 +16,7 @@ class hMan(commands.Cog, name="Hangman"):
         misses = [f"{ASSET_DIR}/zero.png", f'{ASSET_DIR}/one.png', f'{ASSET_DIR}/two.png', f'{ASSET_DIR}/three.png', f'{ASSET_DIR}/four.png', f'{ASSET_DIR}/five.png', f'{ASSET_DIR}/six.png']
         usedLetters = []
         fails = 0
-        url = 'https://random-word-api.herokuapp.com/word'
+        url = 'https://random-word-api.vercel.app/api?words=1'
         word_url = urlopen(url)
         wordChosen = json.loads(word_url.read())
         wordChosen = wordChosen[0]
