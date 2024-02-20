@@ -1,7 +1,8 @@
-import discord, random, asyncio, settings as settings
+import discord, random, asyncio, json, settings as settings
 from discord.ext import commands
 from settings import *
 from config import secrets
+from urllib.request import urlopen
 
 logger = settings.logging.getLogger("discord")
 
@@ -12,16 +13,17 @@ class hMan(commands.Cog, name="Hangman"):
 
     @commands.hybrid_command()
     async def hangman(self, ctx):
-        f = open(f"{ASSET_DIR}/wordList.txt", "r")
-        wordList = f.read()
-        f.close()
-        wordList = wordList.split()
-        # print("Someone is playing Hangman\n\n")
         misses = [f"{ASSET_DIR}/zero.png", f'{ASSET_DIR}/one.png', f'{ASSET_DIR}/two.png', f'{ASSET_DIR}/three.png', f'{ASSET_DIR}/four.png', f'{ASSET_DIR}/five.png', f'{ASSET_DIR}/six.png']
         usedLetters = []
         fails = 0
-        wordChosen = random.choice(wordList)
-        # print(f"The word is {wordChosen}\n\n")
+        url = 'https://random-word-api.herokuapp.com/word'
+        word_url = urlopen(url)
+        wordChosen = json.loads(word_url.read())
+        wordChosen = wordChosen[0]
+        logger.info({
+            "Action": "Someone started playing Hangman!",
+            "Word": wordChosen
+            })
         await ctx.send("Welcome to my Hangman game!")
         await asyncio.sleep(1)
         await ctx.send(file=discord.File(misses[fails]))
