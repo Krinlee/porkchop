@@ -36,44 +36,79 @@ class tRivia(commands.Cog):
             f.close()
             await message_channel.send(f"""@here Yesterday's question was:
             
-            ¯\_(ツ)_/¯  {o_question}  ¯\_(ツ)_/¯""")
+            ¯\_(ツ)_/¯  {o_question}  ¯\_(ツ)_/¯
+
+                                       ---------------------------------------------------------""")
             await message_channel.send(f"""The answer is		(っ ͡ ͡º - ͡ ͡º ς)		 -> {o_answer} <-
         
-        (人❛ᴗ❛)♪тнайк　чоц♪(❛ᴗ❛*人)""")
+                                       
+                                                    (人❛ᴗ❛)♪тнайк　чоц♪(❛ᴗ❛*人)
+                                       
+                                       ---------------------------------------------------------""")
             await asyncio.sleep(10)
             url = 'https://opentdb.com/api.php?amount=1&type=multiple'
             trivia_url = urlopen(url)
             trivia = json.loads(trivia_url.read())
-            question = trivia["results"][0]["question"]
-            answer = trivia["results"][0]["correct_answer"]
+
+            question = trivia["results"][0]["question"].replace('&quot;', '"').replace("&#039;", "'")
+
+            answer = trivia["results"][0]["correct_answer"].replace('&quot;', '"').replace("&#039;", "'")
+
+            wrong_one = trivia["results"][0]["incorrect_answers"][0].replace('&quot;', '"').replace("&#039;", "'")
+
+            wrong_two = trivia["results"][0]["incorrect_answers"][1].replace('&quot;', '"').replace("&#039;", "'")
+
+            wrong_three = trivia["results"][0]["incorrect_answers"][2].replace('&quot;', '"').replace("&#039;", "'")
+
+            answers = [answer, wrong_one, wrong_two, wrong_three]
+            random.shuffle(answers)
+            choices = answers
             f = open(f'{TRIV_DIR}/question.txt', 'w')
             f.write(f"{question}")
             f.close()
             f = open(f'{TRIV_DIR}/answer.txt', 'w')
             f.write(f"{answer}")
-            f.close
+            f.close()
         except:
             url = 'https://opentdb.com/api.php?amount=1&type=multiple'
             trivia_url = urlopen(url)
             trivia = json.loads(trivia_url.read())
-            question = trivia["results"][0]["question"]
-            answer = trivia["results"][0]["correct_answer"]
+
+            question = trivia["results"][0]["question"].replace('&quot;', '"').replace("&#039;", "'")
+
+            answer = trivia["results"][0]["correct_answer"].replace('&quot;', '"').replace("&#039;", "'")
+
+            wrong_one = trivia["results"][0]["incorrect_answers"][0].replace('&quot;', '"').replace("&#039;", "'")
+
+            wrong_two = trivia["results"][0]["incorrect_answers"][1].replace('&quot;', '"').replace("&#039;", "'")
+
+            wrong_three = trivia["results"][0]["incorrect_answers"][2].replace('&quot;', '"').replace("&#039;", "'")
+
+            answers = [answer, wrong_one, wrong_two, wrong_three]
+            random.shuffle(answers)
+            choices = answers
             f = open(f'{TRIV_DIR}/question.txt', 'w')
             f.write(f"{question}")
             f.close()
             f = open(f'{TRIV_DIR}/answer.txt', 'w')
             f.write(f"{answer}")
-            f.close
+            f.close()
         # print(f"Trivia question --> {question} <-- posted to {message_channel}  --  The answer is -> {answer}")
-        await message_channel.send("""@everyone 
+        await message_channel.send("""@here 
         
         As always, post your answers to the trivia in the trivia-answers channel.
 
-        (っ'ヮ'c)	The answer will be posted here on the next day before the next trivia question.""")
+        (っ'ヮ'c)	The answer will be posted here on the next day before the next trivia question.
+                                   
+                                   ---------------------------------------------------------""")
         await asyncio.sleep(3)
         await message_channel.send(f"""🧠	🧠	-> {question} <-	🧠	🧠
         
-        (∩｀-´)⊃━☆ﾟ.*･｡ﾟ""")
+            Your choices are:
+                                   
+        (∩｀-´)⊃━☆ﾟ.*･｡ﾟ     - {choices[0]} -      - {choices[1]} -      - {choices[2]} -      - {choices[3]} -     
+        
+                                    ---------------------------------------------------------""")
 
         
 
