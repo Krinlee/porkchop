@@ -1,4 +1,4 @@
-import discord, os, random, asyncio, json, datetime, settings as settings
+import discord, os, random, asyncio, json, datetime, random, settings as settings
 from discord.ext import commands, tasks
 from settings import *
 from config import secrets
@@ -6,9 +6,9 @@ from urllib.request import urlopen
 
 logger = settings.logging.getLogger('trivia')
 
-target_channel_id = secrets.bchan
+target_channel_id = secrets.tchan
 utc = datetime.timezone.utc
-time = datetime.time(hour=13, minute=5)
+time = datetime.time(hour=19, minute=56)
 
 
 
@@ -44,26 +44,70 @@ class tRivia(commands.Cog):
             url = 'https://opentdb.com/api.php?amount=1&type=multiple'
             trivia_url = urlopen(url)
             trivia = json.loads(trivia_url.read())
+            
             question = trivia["results"][0]["question"]
+            question = question.replace('&quot;', '"')
+            question = question.replace("&#039", "'")
+            
             answer = trivia["results"][0]["correct_answer"]
+            answer = answer.replace('&quot;', '"')
+            answer = answer.replace("&#039", "'")
+            
+            wrong_one = trivia["results"][0]["incorrect_answers"][0]
+            wrong_one = wrong_one.replace('&quot;', '"')
+            wrong_one = wrong_one.replace("&#039", "'")
+            
+            wrong_two = trivia["results"][0]["incorrect_answers"][1]
+            wrong_two = wrong_two.replace('&quot;', '"')
+            wrong_two = wrong_two.replace("&#039", "'")
+            
+            wrong_three = trivia["results"][0]["incorrect_answers"][2]
+            wrong_three = wrong_three.replace('&quot;', '"')
+            wrong_three = wrong_three.replace("&#039", "'")
+            
+            answers = [answer, wrong_one, wrong_two, wrong_three]
+            random.shuffle(answers)
+            choices = answers
             f = open(f'{TRIV_DIR}/question.txt', 'w')
             f.write(f"{question}")
             f.close()
             f = open(f'{TRIV_DIR}/answer.txt', 'w')
             f.write(f"{answer}")
-            f.close
+            f.close()
         except:
             url = 'https://opentdb.com/api.php?amount=1&type=multiple'
             trivia_url = urlopen(url)
             trivia = json.loads(trivia_url.read())
+            
             question = trivia["results"][0]["question"]
+            question = question.replace('&quot;', '"')
+            question = question.replace("&#039", "'")
+            
             answer = trivia["results"][0]["correct_answer"]
+            answer = answer.replace('&quot;', '"')
+            answer = answer.replace("&#039", "'")
+            
+            wrong_one = trivia["results"][0]["incorrect_answers"][0]
+            wrong_one = wrong_one.replace('&quot;', '"')
+            wrong_one = wrong_one.replace("&#039", "'")
+            
+            wrong_two = trivia["results"][0]["incorrect_answers"][1]
+            wrong_two = wrong_two.replace('&quot;', '"')
+            wrong_two = wrong_two.replace("&#039", "'")
+            
+            wrong_three = trivia["results"][0]["incorrect_answers"][2]
+            wrong_three = wrong_three.replace('&quot;', '"')
+            wrong_three = wrong_three.replace("&#039", "'")
+            
+            answers = [answer, wrong_one, wrong_two, wrong_three]
+            random.shuffle(answers)
+            choices = answers
             f = open(f'{TRIV_DIR}/question.txt', 'w')
             f.write(f"{question}")
             f.close()
             f = open(f'{TRIV_DIR}/answer.txt', 'w')
             f.write(f"{answer}")
-            f.close
+            f.close()
         # print(f"Trivia question --> {question} <-- posted to {message_channel}  --  The answer is -> {answer}")
         await message_channel.send("""@everyone 
         
@@ -73,7 +117,8 @@ class tRivia(commands.Cog):
         await asyncio.sleep(3)
         await message_channel.send(f"""🧠	🧠	-> {question} <-	🧠	🧠
         
-        (∩｀-´)⊃━☆ﾟ.*･｡ﾟ""")
+            Your choices are:
+        (∩｀-´)⊃━☆ﾟ.*･｡ﾟ     {choices[0]}, {choices[1]}, {choices[2]}, {choices[3]},     """)
 
         
 
