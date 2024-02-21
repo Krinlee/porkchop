@@ -1,4 +1,4 @@
-import discord, os, random, asyncio, json, datetime, settings as settings
+import discord, os, random, asyncio, json, datetime, random, settings as settings
 from discord.ext import commands, tasks
 from settings import *
 from config import secrets
@@ -6,9 +6,9 @@ from urllib.request import urlopen
 
 logger = settings.logging.getLogger('trivia')
 
-target_channel_id = secrets.bchan
+target_channel_id = secrets.tchan
 utc = datetime.timezone.utc
-time = datetime.time(hour=13, minute=5)
+time = datetime.time(hour=19, minute=56)
 
 
 
