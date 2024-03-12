@@ -46,11 +46,7 @@ def checkuser(user):
         else:
             return False
     except Exception as e:
-        # print("Error checking user: ", e)
         return False
-     
-    # print(status)
-
 
 class twitchLive(commands.Cog):
 
@@ -80,7 +76,7 @@ class twitchLive(commands.Cog):
                         break
                     else:
                         await channel.send(
-                            f":red_circle: **LIVE**\nHey @everyone !!!\n{user.mention} is now streaming on Twitch!"
+                            f":red_circle: **LIVE**\nHey everyone !!!\n{user.mention} is now streaming on Twitch!"
                             f"\nhttps://www.twitch.tv/{twitch_name}")
                         logger.info({
                             "Streamer": twitch_name,
@@ -97,14 +93,9 @@ class twitchLive(commands.Cog):
                             "Message": "Krinlee just went dark"
                             })
                         await message.delete()
-        # logger.info({
-        #     "Streamer": twitch_name,
-        #     "Status": status
-        # })
 
     @live_notifs_loop.before_loop
     async def before_live_notifs_loop(self):
-        # print("\nTwitch Live notifications are good to go!\n")
         await self.bot.wait_until_ready()
 
 async def setup(bot):
