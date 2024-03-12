@@ -1,4 +1,4 @@
-import discord, asyncio, settings
+import discord, asyncio, settings, assets.database as database
 from discord.ext import commands
 from config import secrets
 from assets.account import Account
