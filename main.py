@@ -14,6 +14,7 @@ target_channel_id = secrets.tchan
 
 
 def run():
+	database.db.create_tables([Account])
 	intents = discord.Intents.all()
 
 	bot = commands.Bot(command_prefix="-", intents=intents)
