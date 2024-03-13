@@ -4,12 +4,12 @@ from assets.account import Account
 
 logger = settings.logging.getLogger('discord')
 
-class PlayerPoints(commands.cog, name = 'Player'):
+class PlayerPoints(commands.Cog, name = 'Player'):
 
     def __init__(self, bot):
         self.bot = bot
     
-    @commands.hybric_command()
+    @commands.hybrid_command()
     async def points(self, ctx):
         account = Account.fetch(ctx.message)
         await ctx.send(f"You ahve {account.amount} points")

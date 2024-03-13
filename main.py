@@ -1,4 +1,4 @@
-import discord, asyncio, settings, assets.dbase
+import discord, asyncio, settings, assets.database as database
 from discord.ext import commands
 from config import secrets
 from assets.account import Account
@@ -15,7 +15,7 @@ target_channel_id = secrets.tchan
 
 
 def run():
-	dbase.db.create_tables([Account])
+	database.db.create_tables([Account])
 	intents = discord.Intents.all()
 
 	bot = commands.Bot(command_prefix="-", intents=intents)
