@@ -9,7 +9,7 @@ logger = settings.logging.getLogger('trivia')
 
 target_channel_id = secrets.bchan
 utc = datetime.timezone.utc
-time = datetime.time(hour=15, minute=45)
+time = datetime.time(hour=12, minute=5)
 
 def give_points(ctx):
     account = Account.fetch(ctx.message)
@@ -58,7 +58,7 @@ class tRivia(commands.Cog, name = 'Trivia'):
         f = open(f'{TRIV_DIR}/answer.txt', 'r')
         o_answer = f.read()
         f.close()
-        await message_channel.send(f"""@here
+        await message_channel.send(f"""@everyone
                                    
                                    Yesterday's question was:
             
@@ -74,7 +74,7 @@ class tRivia(commands.Cog, name = 'Trivia'):
                                        ---------------------------------------------------------""")
         await asyncio.sleep(1)
         get_trivia()
-        await message_channel.send("""@here 
+        await message_channel.send(f""" 
         
         As always, post your answers to the trivia in the trivia-answers channel.
 
