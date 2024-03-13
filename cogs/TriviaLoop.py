@@ -7,9 +7,9 @@ from assets.account import Account
 
 logger = settings.logging.getLogger('trivia')
 
-target_channel_id = secrets.tchan
+target_channel_id = secrets.bchan
 utc = datetime.timezone.utc
-time = datetime.time(hour=14, minute=30)
+time = datetime.time(hour=15, minute=45)
 
 def give_points(ctx):
     account = Account.fetch(ctx.message)

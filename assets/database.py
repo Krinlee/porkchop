@@ -1,4 +1,4 @@
 import peewee, settings
 from settings import *
 
-db = peewee.SqliteDatabase(f"{ASSET_DIR}/playerpoints.db")
+db = peewee.SqliteDatabase(f"{CONFIG_DIR}/playerpoints.db")

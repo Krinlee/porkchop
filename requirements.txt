@@ -8,4 +8,4 @@ twitchAPI==4.1.0
 requests
 pytz
 PyNaCl
-peewee
+peewee==3.17.1

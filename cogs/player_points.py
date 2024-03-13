@@ -12,7 +12,7 @@ class PlayerPoints(commands.Cog, name = 'Player'):
     @commands.hybrid_command()
     async def points(self, ctx):
         account = Account.fetch(ctx.message)
-        await ctx.send(f"You ahve {account.amount} points")
+        await ctx.send(f"You have {account.amount} points")
 
 async def setup(bot):
     await bot.add_cog(PlayerPoints(bot))
