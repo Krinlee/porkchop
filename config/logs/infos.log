@@ -1,4 +1,28 @@
-WARNING - 2024-03-13 08:56:25,526 - client : PyNaCl is not installed, voice will NOT be supported
-INFO  - 2024-03-13 08:56:25,530 - client : logging in using static token
-INFO  - 2024-03-13 08:56:26,659 - gateway : Shard ID None has connected to Gateway (Session ID: 8bec503743757548610cf2b0f1ef7444).
-INFO  - 2024-03-13 09:11:56,047 - gateway : Shard ID None has successfully RESUMED session 8bec503743757548610cf2b0f1ef7444.
+WARNING - 2024-03-13 16:51:56,456 - client : PyNaCl is not installed, voice will NOT be supported
+INFO  - 2024-03-13 16:51:56,459 - client : logging in using static token
+INFO  - 2024-03-13 16:51:57,776 - gateway : Shard ID None has connected to Gateway (Session ID: 55f9d0628207ad4e77b75ff4ba10c93d).
+ERROR - 2024-03-13 16:52:06,408 - bot   : Ignoring exception in command answer
+Traceback (most recent call last):
+  File "C:\Users\Seth.Warlick\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\discord\app_commands\commands.py", line 827, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+  File "C:\Users\Seth.Warlick\Documents\Python Files\porkchop\cogs\TriviaLoop.py", line 95, in answer
+    if participant in participants:
+NameError: name 'participants' is not defined
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Seth.Warlick\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\discord\ext\commands\hybrid.py", line 438, in _invoke_with_namespace
+    value = await self._do_call(ctx, ctx.kwargs)  # type: ignore
+  File "C:\Users\Seth.Warlick\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\discord\app_commands\commands.py", line 846, in _do_call
+    raise CommandInvokeError(self, e) from e
+discord.app_commands.errors.CommandInvokeError: Command 'answer' raised an exception: NameError: name 'participants' is not defined
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Seth.Warlick\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\discord\ext\commands\hybrid.py", line 438, in _invoke_with_namespace
+    value = await self._do_call(ctx, ctx.kwargs)  # type: ignore
+  File "C:\Users\Seth.Warlick\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\discord\app_commands\commands.py", line 846, in _do_call
+    raise CommandInvokeError(self, e) from e
+discord.ext.commands.errors.HybridCommandError: Hybrid command raised an error: Command 'answer' raised an exception: NameError: name 'participants' is not defined

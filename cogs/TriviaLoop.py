@@ -12,9 +12,9 @@ utc = datetime.timezone.utc
 time = datetime.time(hour=12, minute=5)
 
 def give_points(ctx):
-    account = Account.fetch(ctx.message)
-    account.amount += 10
-    account.save()
+        account = Account.fetch(ctx.message)
+        account.amount += 10
+        account.save()
 
 def get_trivia():
     global choices, question, answer, participants
@@ -38,7 +38,7 @@ def get_trivia():
     f.close()
 
 # Trivia loop
-class tRivia(commands.Cog, name = 'Trivia'):
+class tRivia(commands.Cog, name = "Trivia"):
 
     def __init__(self, bot):
         self.bot = bot
@@ -47,7 +47,7 @@ class tRivia(commands.Cog, name = 'Trivia'):
     def cog_unload(self) -> None:
         self.trivia.stop()
 
-    @tasks.loop(time=time)
+    @tasks.loop(minutes=2)
     async def trivia(self):
         message_channel = self.bot.get_channel(int(target_channel_id))
         f = open(f'{TRIV_DIR}/question.txt', 'r')
@@ -57,19 +57,19 @@ class tRivia(commands.Cog, name = 'Trivia'):
         o_answer = f.read()
         f.close()
         await message_channel.send(f"""@everyone
-                                   
-                                   Yesterday's question was:
-            
-        ¯\_(ツ)_/¯  {o_question}  ¯\_(ツ)_/¯
-
-                                       ---------------------------------------------------------
-
-        The answer is		(っ ͡ ͡º - ͡ ͡º ς)		 -> {o_answer} <-
+                                    
+                                    Yesterday's question was:
         
-                                       
-                                                    (人❛ᴗ❛)♪тнайк　чоц♪(❛ᴗ❛*人)
-                                       
-                                       ---------------------------------------------------------""")
+        ¯\_(ツ)_/¯   | {o_question} |   ¯\_(ツ)_/¯
+
+                                    ---------------------------------------------------------
+                                    
+        The answer is		(っ ͡ ͡º - ͡ ͡º ς)		 -> {o_answer} <-
+    
+                                    
+                                        (人❛ᴗ❛)♪тнайк　чоц♪(❛ᴗ❛*人)
+                                    
+                                    ---------------------------------------------------------""")
         await asyncio.sleep(1)
         get_trivia()
         await message_channel.send(f""" 
@@ -79,11 +79,11 @@ class tRivia(commands.Cog, name = 'Trivia'):
         (っ'ヮ'c)	The answer will be posted here on the next day before the next trivia question.
                                    
                                    ---------------------------------------------------------
+
+                                                                                                        
+        (∩｀-´)⊃━☆ﾟ.*･｡ﾟ        🧠	🧠	-> {question} <-	🧠	🧠
         
-                                   
-        (∩｀-´)⊃━☆ﾟ.*･｡ﾟ                 🧠	🧠	-> {question} <-	🧠	🧠
-                                   
-                                   Use the /answer command to get your answer choices.
+                                        Use the /answer command to get your choices.
         
                                     ---------------------------------------------------------""")
     @commands.hybrid_command()
@@ -158,8 +158,8 @@ class tRivia(commands.Cog, name = 'Trivia'):
                     })
             else:
                 logger.info({
-                    "User": f"{ctx.author.name} get to try again."
-                })
+                    "User": f"{ctx.author.name} gets to try again."
+                    })
 
         view = SimpleView(timeout=30)
         message = await ctx.send(view=view)
@@ -168,9 +168,9 @@ class tRivia(commands.Cog, name = 'Trivia'):
 
     @trivia.before_loop
     async def before_trivia(self):
+
         await self.bot.wait_until_ready()
 
-    
 async def setup(bot):
     await bot.add_cog(tRivia(bot))
 
