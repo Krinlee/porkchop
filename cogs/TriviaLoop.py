@@ -37,7 +37,6 @@ def get_trivia():
     f.write(f"{answer}")
     f.close()
 
-
 # Trivia loop
 class tRivia(commands.Cog, name = 'Trivia'):
 
@@ -47,7 +46,6 @@ class tRivia(commands.Cog, name = 'Trivia'):
 
     def cog_unload(self) -> None:
         self.trivia.stop()
-        
 
     @tasks.loop(time=time)
     async def trivia(self):
