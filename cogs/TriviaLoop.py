@@ -167,9 +167,12 @@ class tRivia(commands.Cog, name = "Trivia"):
         await view.wait()
     
     @commands.command()
-    async def start(self,ctx):
+    async def start_trivia(self,ctx):
         if ctx.author.id != secrets.MY_ID:
             await ctx.send("You don't have permission to do this!")
+            logger.info({
+                f"{ctx.author.name} tried to start trivia!"
+            })
         else:
             self.trivia.start()
             logger.info({
@@ -177,13 +180,16 @@ class tRivia(commands.Cog, name = "Trivia"):
             })
 
     @commands.command()
-    async def cancel(self,ctx):
+    async def stop_trivia(self,ctx):
         if ctx.author.id != secrets.MY_ID:
             await ctx.send("You don't have permission to do this!")
+            logger.info({
+                f"{ctx.author.name} tried to stop trivia!"
+            })
         else:
             self.trivia.cancel()
             logger.info({
-                f"{ctx.author.name} canceled trivia"
+                f"{ctx.author.name} stopped trivia"
             })
 
     @trivia.before_loop

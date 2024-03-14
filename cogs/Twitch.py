@@ -93,6 +93,34 @@ class twitchLive(commands.Cog):
                             "Message": "Krinlee just went dark"
                             })
                         await message.delete()
+        
+            
+    @commands.command()
+    async def start_live_notifs(self,ctx):
+        if ctx.author.id != secrets.MY_ID:
+            await ctx.send("You don't have permission to do this!")
+            logger.info({
+                f"{ctx.author.name} tried to start Twitch notifications!"
+            })
+        else:
+            self.trivia.start()
+            logger.info({
+                f"{ctx.author.name} started trivia"
+            })
+    
+        
+    @commands.command()
+    async def stop_live_notifs(self,ctx):
+        if ctx.author.id != secrets.MY_ID:
+            await ctx.send("You don't have permission to do this!")
+            logger.info({
+                f"{ctx.author.name} tried to stop Twitch notifications!"
+            })
+        else:
+            self.trivia.start()
+            logger.info({
+                f"{ctx.author.name} started trivia"
+            })
 
     @live_notifs_loop.before_loop
     async def before_live_notifs_loop(self):
