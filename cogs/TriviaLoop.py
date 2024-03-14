@@ -1,7 +1,7 @@
 import discord, os, random, asyncio, json, datetime, random, settings as settings
 from discord.ext import commands, tasks
 from settings import *
-from config import secrets
+from config.secrets import *
 from urllib.request import urlopen
 from assets.account import Account
 
@@ -47,7 +47,7 @@ class tRivia(commands.Cog, name = "Trivia"):
     def cog_unload(self) -> None:
         self.trivia.stop()
 
-    @tasks.loop(minutes=2)
+    @tasks.loop(time=time)
     async def trivia(self):
         message_channel = self.bot.get_channel(int(target_channel_id))
         f = open(f'{TRIV_DIR}/question.txt', 'r')
@@ -165,11 +165,32 @@ class tRivia(commands.Cog, name = "Trivia"):
         message = await ctx.send(view=view)
         view.message = message
         await view.wait()
+    
+    @commands.command()
+    async def start(self,ctx):
+        if ctx.author.id != secrets.MY_ID:
+            await ctx.send("You don't have permission to do this!")
+        else:
+            self.trivia.start()
+            logger.info({
+                f"{ctx.author.name} started trivia"
+            })
+
+    @commands.command()
+    async def cancel(self,ctx):
+        if ctx.author.id != secrets.MY_ID:
+            await ctx.send("You don't have permission to do this!")
+        else:
+            self.trivia.cancel()
+            logger.info({
+                f"{ctx.author.name} canceled trivia"
+            })
 
     @trivia.before_loop
     async def before_trivia(self):
-
-        await self.bot.wait_until_ready()
+        logger.info({
+            "Trivia Started"
+        })
 
 async def setup(bot):
     await bot.add_cog(tRivia(bot))
