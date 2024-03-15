@@ -103,7 +103,7 @@ class twitchLive(commands.Cog):
                 f"{ctx.author.name} tried to start Twitch notifications!"
             })
         else:
-            self.trivia.start()
+            self.live_notifs_loop.start()
             logger.info({
                 f"{ctx.author.name} started trivia"
             })
@@ -117,7 +117,7 @@ class twitchLive(commands.Cog):
                 f"{ctx.author.name} tried to stop Twitch notifications!"
             })
         else:
-            self.trivia.start()
+            self.live_notifs_loop.start()
             logger.info({
                 f"{ctx.author.name} started trivia"
             })
