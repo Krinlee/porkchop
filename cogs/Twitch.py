@@ -59,7 +59,7 @@ class twitchLive(commands.Cog):
 
     @tasks.loop(seconds=15)
     async def live_notifs_loop(self):
-        #print("Loop Hole")
+        print("Loop Hole")
         global userid, stream_data
         notif_status = True
         await twitch.authenticate_app([])
@@ -106,8 +106,7 @@ class twitchLive(commands.Cog):
                 f"{ctx.author.name} tried to start Twitch notifications!"
             })
         elif notif_status == False and ctx.author.id == secrets.MY_ID:
-            self.live_notifs_loop.stop()
-            notif_status = True
+            self.live_notifs_loop.start()
             await ctx.send("You have turned on Twitch notifications!")
             logger.info({
                 f"{ctx.author.name} started twitch notifications"
