@@ -62,7 +62,7 @@ class twitchLive(commands.Cog):
     @tasks.loop(seconds=15)
     async def live_notifs_loop(self):
         print("Loop Hole")
-        global userid, stream_data
+        global userid, stream_data, notif_status
         notif_status = True
         await twitch.authenticate_app([])
         userid = requests.get(f'https://api.twitch.tv/helix/streams?user_login={streamer_name}', headers=API_HEADERS)
