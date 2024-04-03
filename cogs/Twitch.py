@@ -55,9 +55,11 @@ class twitchLive(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.live_notifs_loop.start()
+        notif_status = True
 
     def cog_unload(self) -> None:
         self.live_notifs_loop.stop()
+        notif_status = False
 
     @tasks.loop(seconds=15)
     async def live_notifs_loop(self):
@@ -95,7 +97,6 @@ class twitchLive(commands.Cog):
                             "Message": "Krinlee just went dark"
                             })
                         await message.delete()
-        notif_status = True
         
             
     @commands.command()
