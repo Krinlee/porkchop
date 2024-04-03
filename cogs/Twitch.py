@@ -10,6 +10,8 @@ from config import secrets
 
 logger = settings.logging.getLogger('twitch')
 
+notif_status = False
+
 timezone = pytz.timezone(secrets.tzone)
 datetime_ = datetime.now(timezone)
 today = date.today()
@@ -93,6 +95,7 @@ class twitchLive(commands.Cog):
                             "Message": "Krinlee just went dark"
                             })
                         await message.delete()
+        notif_status = True
         
             
     @commands.command()
@@ -102,11 +105,14 @@ class twitchLive(commands.Cog):
             logger.info({
                 f"{ctx.author.name} tried to start Twitch notifications!"
             })
-        else:
+        elif ctx.author.id == secrets.MY_ID:
             self.live_notifs_loop.start()
+            await ctx.send("You have turned on Twitch notifications!")
             logger.info({
-                f"{ctx.author.name} started trivia"
+                f"{ctx.author.name} started twitch notifications"
             })
+        elif ctx.author.id == secrets.MY_ID and notif_status == True:
+            await ctx.send("Twitch notifications are already on!")
     
         
     @commands.command()
@@ -116,11 +122,14 @@ class twitchLive(commands.Cog):
             logger.info({
                 f"{ctx.author.name} tried to stop Twitch notifications!"
             })
-        else:
+        elif ctx.author.id == secrets.MY_ID:
             self.live_notifs_loop.start()
+            await ctx.send("You have turned off Twitch notifications!")
             logger.info({
-                f"{ctx.author.name} started trivia"
+                f"{ctx.author.name} stopped Twitch notifications"
             })
+        elif ctx.author.id == secrets.MY_ID and notif_status == False:
+            await ctx.send("Twitch notifications are already off!")
 
     @live_notifs_loop.before_loop
     async def before_live_notifs_loop(self):
