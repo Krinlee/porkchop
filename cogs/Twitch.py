@@ -58,7 +58,6 @@ class twitchLive(commands.Cog):
     
     def cog_unload(self) -> None:
         self.live_notifs_loop.stop()
-        notif_status = False
 
     @tasks.loop(seconds=15)
     async def live_notifs_loop(self):
@@ -102,7 +101,7 @@ class twitchLive(commands.Cog):
             
     @commands.command()
     async def start_live_notifs(self,ctx):
-        global start_loop
+        global notif_status
         if ctx.author.id != secrets.MY_ID:
             await ctx.send("You don't have permission to do this!")
             logger.info({
@@ -121,7 +120,7 @@ class twitchLive(commands.Cog):
         
     @commands.command()
     async def stop_live_notifs(self,ctx):
-        global stop_loop
+        global notif_status
         if ctx.author.id != secrets.MY_ID:
             await ctx.send("You don't have permission to do this!")
             logger.info({
