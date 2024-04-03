@@ -62,7 +62,9 @@ class twitchLive(commands.Cog):
 
     @tasks.loop(seconds=15)
     async def live_notifs_loop(self):
+        print("Loop Hole")
         global userid, stream_data
+        notif_status = True
         await twitch.authenticate_app([])
         userid = requests.get(f'https://api.twitch.tv/helix/streams?user_login={streamer_name}', headers=API_HEADERS)
         stream_data = userid.json()
@@ -96,7 +98,6 @@ class twitchLive(commands.Cog):
                             "Message": "Krinlee just went dark"
                             })
                         await message.delete()
-        notif_status = True
         
             
     @commands.command()
