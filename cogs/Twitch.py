@@ -56,11 +56,11 @@ class twitchLive(commands.Cog):
         self.bot = bot
         self.live_notifs_loop.start()
     
-    def cog_load(self) -> None:
+    def start_loop(self):
         self.live_notifs_loop.start()
         notif_status = True
 
-    def cog_unload(self) -> None:
+    def stop_loop(self):
         self.live_notifs_loop.stop()
         notif_status = False
 
@@ -105,7 +105,7 @@ class twitchLive(commands.Cog):
             
     @commands.command()
     async def start_live_notifs(self,ctx):
-        global cog_load
+        global start_loop
         if ctx.author.id != secrets.MY_ID:
             await ctx.send("You don't have permission to do this!")
             logger.info({
@@ -119,12 +119,12 @@ class twitchLive(commands.Cog):
             })
         elif ctx.author.id == secrets.MY_ID and notif_status == True:
             await ctx.send("Twitch notifications are already on!")
-        cog_load()
+        start_loop()
     
         
     @commands.command()
     async def stop_live_notifs(self,ctx):
-        global cog_unload
+        global stop_loop
         if ctx.author.id != secrets.MY_ID:
             await ctx.send("You don't have permission to do this!")
             logger.info({
@@ -138,7 +138,7 @@ class twitchLive(commands.Cog):
             })
         elif ctx.author.id == secrets.MY_ID and notif_status == False:
             await ctx.send("Twitch notifications are already off!")
-        cog_unload()
+        stop_loop()
 
     @live_notifs_loop.before_loop
     async def before_live_notifs_loop(self):
