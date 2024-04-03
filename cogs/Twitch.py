@@ -59,7 +59,7 @@ class twitchLive(commands.Cog):
 
     @tasks.loop(seconds=15)
     async def live_notifs_loop(self):
-        print("Loop Hole")
+        #print("Loop Hole")
         global userid, stream_data, notif_status
         notif_status = True
         await twitch.authenticate_app([])
