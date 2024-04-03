@@ -5,12 +5,10 @@ from discord.utils import get
 from datetime import datetime
 from datetime import date
 from settings import *
-global userid, stream_data
+global userid, stream_data, notif_status
 from config import secrets
 
 logger = settings.logging.getLogger('twitch')
-
-notif_status = False
 
 timezone = pytz.timezone(secrets.tzone)
 datetime_ = datetime.now(timezone)
