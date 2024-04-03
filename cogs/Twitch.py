@@ -108,7 +108,7 @@ class twitchLive(commands.Cog):
             logger.info({
                 f"{ctx.author.name} tried to start Twitch notifications!"
             })
-        elif ctx.author.id == secrets.MY_ID:
+        elif ctx.author.id == secrets.MY_ID and notif_status == False:
             self.live_notifs_loop.stop()
             notif_status = True
             await ctx.send("You have turned on Twitch notifications!")
@@ -127,7 +127,7 @@ class twitchLive(commands.Cog):
             logger.info({
                 f"{ctx.author.name} tried to stop Twitch notifications!"
             })
-        elif ctx.author.id == secrets.MY_ID:
+        elif ctx.author.id == secrets.MY_ID and notif_status == True:
             self.live_notifs_loop.stop()
             notif_status = False
             await ctx.send("You have turned off Twitch notifications!")
