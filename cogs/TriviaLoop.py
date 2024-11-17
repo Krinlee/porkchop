@@ -9,7 +9,7 @@ logger = settings.logging.getLogger('trivia')
 
 target_channel_id = secrets.bchan
 utc = datetime.timezone.utc
-time = datetime.time(hour=12, minute=5)
+time = datetime.time(hour=13, minute=5)
 
 def give_points(ctx):
         account = Account.fetch(ctx.message)
